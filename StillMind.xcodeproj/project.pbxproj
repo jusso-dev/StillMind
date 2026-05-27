@@ -1,0 +1,570 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10000001 /* StillMindApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000001 /* StillMindApp.swift */; };
+		A10000002 /* VoiceEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000002 /* VoiceEntry.swift */; };
+		A10000003 /* StructuredSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000003 /* StructuredSummary.swift */; };
+		A10000004 /* RecordingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000004 /* RecordingService.swift */; };
+		A10000005 /* TranscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000005 /* TranscriptionService.swift */; };
+		A10000006 /* SummarizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000006 /* SummarizationService.swift */; };
+		A10000007 /* EncryptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000007 /* EncryptionService.swift */; };
+		A10000008 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000008 /* KeychainService.swift */; };
+		A10000009 /* SecureFileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000009 /* SecureFileStore.swift */; };
+		A10000010 /* EntryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010 /* EntryRepository.swift */; };
+		A10000011 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000011 /* SearchService.swift */; };
+		A10000012 /* BiometricService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000012 /* BiometricService.swift */; };
+		A10000013 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000013 /* RecordView.swift */; };
+		A10000014 /* EntryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000014 /* EntryListView.swift */; };
+		A10000015 /* EntryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000015 /* EntryDetailView.swift */; };
+		A10000016 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000016 /* SearchView.swift */; };
+		A10000017 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000017 /* SettingsView.swift */; };
+		A10000018 /* LockScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000018 /* LockScreenView.swift */; };
+		A10000019 /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000019 /* RecordViewModel.swift */; };
+		A10000020 /* EntryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000020 /* EntryListViewModel.swift */; };
+		A10000021 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000021 /* SearchViewModel.swift */; };
+		A10000022 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A20000022 /* Assets.xcassets */; };
+		A10000023 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000024 /* Project.swift */; };
+		A10000024 /* ProjectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000025 /* ProjectRepository.swift */; };
+		A10000025 /* PDFExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000026 /* PDFExportService.swift */; };
+		A10000026 /* ProjectListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000027 /* ProjectListViewModel.swift */; };
+		A10000027 /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000028 /* ProjectListView.swift */; };
+		A10000028 /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000029 /* ProjectDetailView.swift */; };
+		A10000029 /* PDFExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000030 /* PDFExportView.swift */; };
+		A10000031 /* InsightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000031 /* InsightsView.swift */; };
+		A10000032 /* BackupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000032 /* BackupService.swift */; };
+		A10000033 /* NightlyBackupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000033 /* NightlyBackupService.swift */; };
+		A10000034 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000034 /* NotificationService.swift */; };
+		A10000035 /* StoreKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000035 /* StoreKitService.swift */; };
+		A10000036 /* ProUpgradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000036 /* ProUpgradeView.swift */; };
+		A10000038 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000038 /* LaunchView.swift */; };
+		A10000039 /* ExtractiveSummarizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000039 /* ExtractiveSummarizer.swift */; };
+		A10000040 /* StillMindInference.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000040 /* StillMindInference.swift */; };
+		A10000041 /* StillMindTagger.mlpackage in Resources */ = {isa = PBXBuildFile; fileRef = A20000041 /* StillMindTagger.mlpackage */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		A10000042 /* vocab.txt in Resources */ = {isa = PBXBuildFile; fileRef = A20000042 /* vocab.txt */; };
+		A10000043 /* TaggingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000043 /* TaggingService.swift */; };
+		A10000044 /* SafetyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000044 /* SafetyService.swift */; };
+		A10000050 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000050 /* OnboardingView.swift */; };
+		A161A1993548344EA78F2DA5 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2506BA1532CDF63CB85FE47 /* Theme.swift */; };
+		A6C31D6197C657F50EEC6BD4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492A03B47F82F5C2547F11A4 /* HomeView.swift */; };
+		CAC00001 /* cactus-ios.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC00003 /* cactus-ios.xcframework */; };
+		CAC00002 /* cactus-ios.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CAC00003 /* cactus-ios.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CAC00006 /* CactusTranscriptionModel in Resources */ = {isa = PBXBuildFile; fileRef = CAC00007 /* CactusTranscriptionModel */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CAC00005 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CAC00002 /* cactus-ios.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		492A03B47F82F5C2547F11A4 /* HomeView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		A20000001 /* StillMindApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillMindApp.swift; sourceTree = "<group>"; };
+		A20000002 /* VoiceEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceEntry.swift; sourceTree = "<group>"; };
+		A20000003 /* StructuredSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructuredSummary.swift; sourceTree = "<group>"; };
+		A20000004 /* RecordingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingService.swift; sourceTree = "<group>"; };
+		A20000005 /* TranscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionService.swift; sourceTree = "<group>"; };
+		A20000006 /* SummarizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizationService.swift; sourceTree = "<group>"; };
+		A20000007 /* EncryptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionService.swift; sourceTree = "<group>"; };
+		A20000008 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		A20000009 /* SecureFileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureFileStore.swift; sourceTree = "<group>"; };
+		A20000010 /* EntryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryRepository.swift; sourceTree = "<group>"; };
+		A20000011 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
+		A20000012 /* BiometricService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricService.swift; sourceTree = "<group>"; };
+		A20000013 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		A20000014 /* EntryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListView.swift; sourceTree = "<group>"; };
+		A20000015 /* EntryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailView.swift; sourceTree = "<group>"; };
+		A20000016 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		A20000017 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A20000018 /* LockScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenView.swift; sourceTree = "<group>"; };
+		A20000019 /* RecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModel.swift; sourceTree = "<group>"; };
+		A20000020 /* EntryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListViewModel.swift; sourceTree = "<group>"; };
+		A20000021 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		A20000022 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A20000023 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A20000024 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		A20000025 /* ProjectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRepository.swift; sourceTree = "<group>"; };
+		A20000026 /* PDFExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportService.swift; sourceTree = "<group>"; };
+		A20000027 /* ProjectListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewModel.swift; sourceTree = "<group>"; };
+		A20000028 /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
+		A20000029 /* ProjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailView.swift; sourceTree = "<group>"; };
+		A20000030 /* PDFExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportView.swift; sourceTree = "<group>"; };
+		A20000031 /* InsightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsView.swift; sourceTree = "<group>"; };
+		A20000032 /* BackupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupService.swift; sourceTree = "<group>"; };
+		A20000033 /* NightlyBackupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightlyBackupService.swift; sourceTree = "<group>"; };
+		A20000034 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		A20000035 /* StoreKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitService.swift; sourceTree = "<group>"; };
+		A20000036 /* ProUpgradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProUpgradeView.swift; sourceTree = "<group>"; };
+		A20000038 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		A20000039 /* ExtractiveSummarizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtractiveSummarizer.swift; sourceTree = "<group>"; };
+		A20000040 /* StillMindInference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillMindInference.swift; sourceTree = "<group>"; };
+		A20000041 /* StillMindTagger.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder; path = StillMindTagger.mlpackage; sourceTree = "<group>"; };
+		A20000042 /* vocab.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = vocab.txt; sourceTree = "<group>"; };
+		A20000043 /* TaggingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaggingService.swift; sourceTree = "<group>"; };
+		A20000044 /* SafetyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyService.swift; sourceTree = "<group>"; };
+		A20000050 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		A30000001 /* StillMind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StillMind.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAC00003 /* cactus-ios.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = "cactus-ios.xcframework"; sourceTree = "<group>"; };
+		CAC00007 /* CactusTranscriptionModel */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CactusTranscriptionModel; sourceTree = "<group>"; };
+		D2506BA1532CDF63CB85FE47 /* Theme.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A40000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAC00001 /* cactus-ios.xcframework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A50000001 = {
+			isa = PBXGroup;
+			children = (
+				A50000002 /* StillMind */,
+				A50000007 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A50000002 /* StillMind */ = {
+			isa = PBXGroup;
+			children = (
+				A50000003 /* App */,
+				A50000004 /* Models */,
+				A50000005 /* Services */,
+				A50000006 /* ViewModels */,
+				A50000008 /* Views */,
+				CAC00004 /* Frameworks */,
+				A20000022 /* Assets.xcassets */,
+				A20000023 /* Info.plist */,
+				A20000041 /* StillMindTagger.mlpackage */,
+				CAC00007 /* CactusTranscriptionModel */,
+				A20000042 /* vocab.txt */,
+			);
+			path = StillMind;
+			sourceTree = "<group>";
+		};
+		A50000003 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A20000001 /* StillMindApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A50000004 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A20000002 /* VoiceEntry.swift */,
+				A20000003 /* StructuredSummary.swift */,
+				A20000024 /* Project.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A50000005 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A20000004 /* RecordingService.swift */,
+				A20000005 /* TranscriptionService.swift */,
+				A20000006 /* SummarizationService.swift */,
+				A20000007 /* EncryptionService.swift */,
+				A20000008 /* KeychainService.swift */,
+				A20000009 /* SecureFileStore.swift */,
+				A20000010 /* EntryRepository.swift */,
+				A20000011 /* SearchService.swift */,
+				A20000012 /* BiometricService.swift */,
+				A20000025 /* ProjectRepository.swift */,
+				A20000026 /* PDFExportService.swift */,
+				A20000032 /* BackupService.swift */,
+				A20000033 /* NightlyBackupService.swift */,
+				A20000034 /* NotificationService.swift */,
+				A20000035 /* StoreKitService.swift */,
+				A20000039 /* ExtractiveSummarizer.swift */,
+				A20000040 /* StillMindInference.swift */,
+				A20000043 /* TaggingService.swift */,
+				A20000044 /* SafetyService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A50000006 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A20000019 /* RecordViewModel.swift */,
+				A20000020 /* EntryListViewModel.swift */,
+				A20000021 /* SearchViewModel.swift */,
+				A20000027 /* ProjectListViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A50000007 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A30000001 /* StillMind.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A50000008 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A20000013 /* RecordView.swift */,
+				A20000014 /* EntryListView.swift */,
+				A20000015 /* EntryDetailView.swift */,
+				A20000016 /* SearchView.swift */,
+				A20000017 /* SettingsView.swift */,
+				A20000018 /* LockScreenView.swift */,
+				A20000028 /* ProjectListView.swift */,
+				A20000029 /* ProjectDetailView.swift */,
+				A20000030 /* PDFExportView.swift */,
+				A20000031 /* InsightsView.swift */,
+				A20000036 /* ProUpgradeView.swift */,
+				D2506BA1532CDF63CB85FE47 /* Theme.swift */,
+				492A03B47F82F5C2547F11A4 /* HomeView.swift */,
+				A20000038 /* LaunchView.swift */,
+				A20000050 /* OnboardingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CAC00004 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CAC00003 /* cactus-ios.xcframework */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A60000001 /* StillMind */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A80000003 /* Build configuration list for PBXNativeTarget "StillMind" */;
+			buildPhases = (
+				A70000001 /* Sources */,
+				A40000001 /* Frameworks */,
+				CAC00005 /* Embed Frameworks */,
+				A70000002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StillMind;
+			productName = StillMind;
+			productReference = A30000001 /* StillMind.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A90000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 2630;
+				TargetAttributes = {
+					A60000001 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = A80000001 /* Build configuration list for PBXProject "StillMind" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A50000001;
+			productRefGroup = A50000007 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A60000001 /* StillMind */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A70000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000022 /* Assets.xcassets in Resources */,
+				A10000041 /* StillMindTagger.mlpackage in Resources */,
+				CAC00006 /* CactusTranscriptionModel in Resources */,
+				A10000042 /* vocab.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A70000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000001 /* StillMindApp.swift in Sources */,
+				A10000002 /* VoiceEntry.swift in Sources */,
+				A10000003 /* StructuredSummary.swift in Sources */,
+				A10000004 /* RecordingService.swift in Sources */,
+				A10000005 /* TranscriptionService.swift in Sources */,
+				A10000006 /* SummarizationService.swift in Sources */,
+				A10000007 /* EncryptionService.swift in Sources */,
+				A10000008 /* KeychainService.swift in Sources */,
+				A10000009 /* SecureFileStore.swift in Sources */,
+				A10000010 /* EntryRepository.swift in Sources */,
+				A10000011 /* SearchService.swift in Sources */,
+				A10000012 /* BiometricService.swift in Sources */,
+				A10000013 /* RecordView.swift in Sources */,
+				A10000014 /* EntryListView.swift in Sources */,
+				A10000015 /* EntryDetailView.swift in Sources */,
+				A10000016 /* SearchView.swift in Sources */,
+				A10000017 /* SettingsView.swift in Sources */,
+				A10000018 /* LockScreenView.swift in Sources */,
+				A10000019 /* RecordViewModel.swift in Sources */,
+				A10000020 /* EntryListViewModel.swift in Sources */,
+				A10000021 /* SearchViewModel.swift in Sources */,
+				A10000023 /* Project.swift in Sources */,
+				A10000024 /* ProjectRepository.swift in Sources */,
+				A10000025 /* PDFExportService.swift in Sources */,
+				A10000026 /* ProjectListViewModel.swift in Sources */,
+				A10000027 /* ProjectListView.swift in Sources */,
+				A10000028 /* ProjectDetailView.swift in Sources */,
+				A10000029 /* PDFExportView.swift in Sources */,
+				A10000031 /* InsightsView.swift in Sources */,
+				A10000032 /* BackupService.swift in Sources */,
+				A10000033 /* NightlyBackupService.swift in Sources */,
+				A10000034 /* NotificationService.swift in Sources */,
+				A10000035 /* StoreKitService.swift in Sources */,
+				A10000036 /* ProUpgradeView.swift in Sources */,
+				A161A1993548344EA78F2DA5 /* Theme.swift in Sources */,
+				A6C31D6197C657F50EEC6BD4 /* HomeView.swift in Sources */,
+				A10000038 /* LaunchView.swift in Sources */,
+				A10000050 /* OnboardingView.swift in Sources */,
+				A10000039 /* ExtractiveSummarizer.swift in Sources */,
+				A10000040 /* StillMindInference.swift in Sources */,
+				A10000043 /* TaggingService.swift in Sources */,
+				A10000044 /* SafetyService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		B10000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		B10000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B10000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = x86_64;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StillMind/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StillMind;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "StillMind uses Face ID to protect your private journal.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "StillMind needs microphone access to record your voice entries.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.stillmind;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B10000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = x86_64;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StillMind/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StillMind;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "StillMind uses Face ID to protect your private journal.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "StillMind needs microphone access to record your voice entries.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.stillmind;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A80000001 /* Build configuration list for PBXProject "StillMind" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B10000001 /* Debug */,
+				B10000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A80000003 /* Build configuration list for PBXNativeTarget "StillMind" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B10000003 /* Debug */,
+				B10000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A90000001 /* Project object */;
+}
