@@ -2,7 +2,7 @@ import AVFoundation
 import Combine
 
 /// Manages audio recording using AVFoundation.
-/// Records to a temporary 16 kHz mono, 16-bit PCM WAV file for Cactus transcription.
+/// Records to a temporary file in AAC format.
 final class RecordingService: NSObject, ObservableObject, @unchecked Sendable {
     @Published var isRecording = false
     @Published var currentTime: TimeInterval = 0
@@ -25,16 +25,14 @@ final class RecordingService: NSObject, ObservableObject, @unchecked Sendable {
     /// Starts recording audio to a temporary file.
     func startRecording() throws {
         let tempDir = FileManager.default.temporaryDirectory
-        let url = tempDir.appendingPathComponent(UUID().uuidString).appendingPathExtension("wav")
+        let url = tempDir.appendingPathComponent(UUID().uuidString).appendingPathExtension("m4a")
 
-        // Cactus file-based transcription expects 16-bit PCM WAV audio.
+        // 16kHz mono is optimal for the on-device speech recognizer
         let settings: [String: Any] = [
-            AVFormatIDKey: Int(kAudioFormatLinearPCM),
+            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
             AVSampleRateKey: 16000.0,
             AVNumberOfChannelsKey: 1,
-            AVLinearPCMBitDepthKey: 16,
-            AVLinearPCMIsFloatKey: false,
-            AVLinearPCMIsBigEndianKey: false
+            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
         ]
 
         let recorder = try AVAudioRecorder(url: url, settings: settings)

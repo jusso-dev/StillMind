@@ -20,10 +20,10 @@ and as a reference implementation for local-first, private journaling workflows.
 
 ### On-Device Transcription
 
-- Uses the vendored Cactus iOS framework for local speech-to-text.
-- Records Cactus-compatible 16 kHz mono, 16-bit PCM WAV audio.
-- Loads `CactusTranscriptionModel` from the app bundle or Application Support.
-- Does not require the Apple Speech framework or cloud transcription.
+- Uses Apple's Speech framework for local speech-to-text where supported.
+- Records 16 kHz mono AAC audio optimized for on-device recognition.
+- Splits longer recordings into overlapping segments and stitches transcripts.
+- Requires the user to grant Speech Recognition permission.
 
 ### Local AI Summaries
 
@@ -67,7 +67,7 @@ LLM calls, or crash reporting without explicit opt-in UX and documentation.
 | Language | Swift |
 | UI | SwiftUI |
 | Audio | AVFoundation |
-| Transcription | Cactus iOS framework |
+| Transcription | Apple Speech framework |
 | Summaries and tags | Core ML, NaturalLanguage |
 | Encryption | CryptoKit AES-GCM |
 | Key storage | Security Keychain |
@@ -90,8 +90,6 @@ StillMind/
 ├── ViewModels/             # UI state and workflow orchestration
 ├── Services/               # Storage, encryption, transcription, backup, etc.
 ├── Assets.xcassets/        # App icon, launch logo, colors
-├── Frameworks/             # Vendored Cactus iOS framework
-├── CactusTranscriptionModel/
 ├── StillMindTagger.mlpackage/
 └── Info.plist
 ```
@@ -113,7 +111,8 @@ Important implementation details:
 - `SecureFileStore` encrypts audio before storing it under Documents.
 - `EncryptionService` uses AES-GCM and supports key versioning.
 - `NightlyBackupService` uses `BGTaskScheduler` plus app-background fallbacks.
-- `CactusTranscriptionRuntime` serializes access to the native Cactus model.
+- `TranscriptionService` uses Apple's on-device recognizer and overlapping
+  segments for longer recordings.
 
 ## Requirements
 
@@ -150,30 +149,18 @@ git lfs install
 For physical devices, set your own Apple development team in Xcode and replace
 the placeholder bundle identifier `com.example.stillmind` with one you control.
 
-## Model and Framework Assets
+## Model Assets
 
-The repository includes vendored runtime assets required for local inference:
+The repository includes local inference assets for tag and mood classification:
 
-- `StillMind/Frameworks/cactus-ios.xcframework`
-- `StillMind/CactusTranscriptionModel`
 - `StillMind/StillMindTagger.mlpackage`
 - `StillMind/vocab.txt`
 
-Large binary assets are tracked with Git LFS. If Xcode reports missing model or
-framework files, run:
+Large binary assets are tracked with Git LFS. If Xcode reports missing model
+files, run:
 
 ```sh
 git lfs pull
-```
-
-To update the Cactus framework, rebuild the upstream Apple SDK and replace the
-vendored framework:
-
-```sh
-git clone https://github.com/cactus-compute/cactus
-cd cactus
-source ./setup
-cactus build --apple
 ```
 
 See `THIRD_PARTY_NOTICES.md` for third-party source and licensing notes.
@@ -185,6 +172,7 @@ The app declares these user-facing permissions:
 | Permission | Purpose |
 | --- | --- |
 | Microphone | Record voice journal entries |
+| Speech Recognition | Transcribe voice journal entries on device |
 | Face ID | Protect private journal content |
 
 The app also declares the background task identifier

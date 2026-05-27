@@ -50,24 +50,7 @@
 		A10000050 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000050 /* OnboardingView.swift */; };
 		A161A1993548344EA78F2DA5 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2506BA1532CDF63CB85FE47 /* Theme.swift */; };
 		A6C31D6197C657F50EEC6BD4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492A03B47F82F5C2547F11A4 /* HomeView.swift */; };
-		CAC00001 /* cactus-ios.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC00003 /* cactus-ios.xcframework */; };
-		CAC00002 /* cactus-ios.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CAC00003 /* cactus-ios.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		CAC00006 /* CactusTranscriptionModel in Resources */ = {isa = PBXBuildFile; fileRef = CAC00007 /* CactusTranscriptionModel */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		CAC00005 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				CAC00002 /* cactus-ios.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		492A03B47F82F5C2547F11A4 /* HomeView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -114,8 +97,6 @@
 		A20000044 /* SafetyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyService.swift; sourceTree = "<group>"; };
 		A20000050 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		A30000001 /* StillMind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StillMind.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CAC00003 /* cactus-ios.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = "cactus-ios.xcframework"; sourceTree = "<group>"; };
-		CAC00007 /* CactusTranscriptionModel */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CactusTranscriptionModel; sourceTree = "<group>"; };
 		D2506BA1532CDF63CB85FE47 /* Theme.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,7 +105,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAC00001 /* cactus-ios.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,11 +127,9 @@
 				A50000005 /* Services */,
 				A50000006 /* ViewModels */,
 				A50000008 /* Views */,
-				CAC00004 /* Frameworks */,
 				A20000022 /* Assets.xcassets */,
 				A20000023 /* Info.plist */,
 				A20000041 /* StillMindTagger.mlpackage */,
-				CAC00007 /* CactusTranscriptionModel */,
 				A20000042 /* vocab.txt */,
 			);
 			path = StillMind;
@@ -240,14 +218,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		CAC00004 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				CAC00003 /* cactus-ios.xcframework */,
-			);
-			path = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -257,7 +227,6 @@
 			buildPhases = (
 				A70000001 /* Sources */,
 				A40000001 /* Frameworks */,
-				CAC00005 /* Embed Frameworks */,
 				A70000002 /* Resources */,
 			);
 			buildRules = (
@@ -309,7 +278,6 @@
 			files = (
 				A10000022 /* Assets.xcassets in Resources */,
 				A10000041 /* StillMindTagger.mlpackage in Resources */,
-				CAC00006 /* CactusTranscriptionModel in Resources */,
 				A10000042 /* vocab.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -486,6 +454,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "StillMind uses Face ID to protect your private journal.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "StillMind needs microphone access to record your voice entries.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "StillMind uses on-device speech recognition to transcribe voice journal entries.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -518,6 +487,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "StillMind uses Face ID to protect your private journal.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "StillMind needs microphone access to record your voice entries.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "StillMind uses on-device speech recognition to transcribe voice journal entries.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
