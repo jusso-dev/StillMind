@@ -6,11 +6,9 @@ struct HomeView: View {
     let projectRepository: ProjectRepository
     let secureFileStore: SecureFileStore
     @Bindable var recordViewModel: RecordViewModel
-    let storeService: StoreKitService
 
     @State private var recentEntries: [VoiceEntry] = []
     @State private var showingRecorder = false
-    @State private var showingUpgrade = false
     @State private var entryToDelete: VoiceEntry?
 
     private var greeting: String {
@@ -135,9 +133,6 @@ struct HomeView: View {
             }) {
                 RecordView(viewModel: recordViewModel, isPresented: $showingRecorder)
             }
-            .sheet(isPresented: $showingUpgrade) {
-                ProUpgradeView(storeService: storeService, feature: .entries)
-            }
             .confirmationDialog(
                 "Delete Entry",
                 isPresented: Binding(
@@ -173,12 +168,8 @@ struct HomeView: View {
 
     private var recordCard: some View {
         Button {
-            if recordViewModel.canCreateEntry {
-                Haptics.medium()
-                showingRecorder = true
-            } else {
-                showingUpgrade = true
-            }
+            Haptics.medium()
+            showingRecorder = true
         } label: {
             VStack(spacing: Spacing.md) {
                 Image(systemName: "waveform")

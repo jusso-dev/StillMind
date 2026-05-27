@@ -9,7 +9,6 @@ struct EntryListView: View {
 
     let viewModel: EntryListViewModel
     let projectViewModel: ProjectListViewModel
-    let storeService: StoreKitService
     let secureFileStore: SecureFileStore
     let entryRepository: EntryRepository
     let projectRepository: ProjectRepository
@@ -19,7 +18,6 @@ struct EntryListView: View {
     @State private var entryToDelete: VoiceEntry?
     @State private var showingDeleteConfirmation = false
     @State private var showingNewProject = false
-    @State private var showingUpgrade = false
     @State private var newProjectName = ""
     @State private var newProjectDescription = ""
 
@@ -69,11 +67,7 @@ struct EntryListView: View {
                 if selectedTab == .projects {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
-                            if storeService.canCreateProjects {
-                                showingNewProject = true
-                            } else {
-                                showingUpgrade = true
-                            }
+                            showingNewProject = true
                         } label: {
                             Image(systemName: "folder.badge.plus")
                         }
@@ -119,9 +113,6 @@ struct EntryListView: View {
                         newProjectDescription = ""
                     }
                 }
-            }
-            .sheet(isPresented: $showingUpgrade) {
-                ProUpgradeView(storeService: storeService, feature: .projects)
             }
         }
     }
@@ -180,19 +171,11 @@ struct EntryListView: View {
             Spacer()
         } else if filteredProjects.isEmpty {
             if searchText.isEmpty {
-                if storeService.canCreateProjects {
-                    ContentUnavailableView(
-                        "No Projects",
-                        systemImage: "folder.badge.plus",
-                        description: Text("Create a project to organize your journal entries.")
-                    )
-                } else {
-                    ContentUnavailableView(
-                        "Pro Feature",
-                        systemImage: "lock.fill",
-                        description: Text("Upgrade to Pro to create projects and organize your journal entries.")
-                    )
-                }
+                ContentUnavailableView(
+                    "No Projects",
+                    systemImage: "folder.badge.plus",
+                    description: Text("Create a project to organize your journal entries.")
+                )
             } else {
                 ContentUnavailableView.search(text: searchText)
             }

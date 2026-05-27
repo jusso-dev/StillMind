@@ -1,7 +1,7 @@
 import LocalAuthentication
 import SwiftUI
 
-/// Atmospheric biometric lock screen — feels premium and safe.
+/// Atmospheric biometric lock screen for private journal access.
 struct LockScreenView: View {
     @Binding var isUnlocked: Bool
     @State private var authError: String?

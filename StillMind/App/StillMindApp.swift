@@ -20,7 +20,6 @@ struct StillMindApp: App {
     private let backupService: BackupService
     private let nightlyBackupService: NightlyBackupService
     private let notificationService: NotificationService
-    @State private var storeService = StoreKitService()
 
     init() {
         let encryption = EncryptionService()
@@ -69,8 +68,7 @@ struct StillMindApp: App {
                 searchService: searchService,
                 backupService: backupService,
                 nightlyBackupService: nightlyBackupService,
-                notificationService: notificationService,
-                storeService: storeService
+                notificationService: notificationService
             )
             .overlay {
                 if requireBiometrics && !isUnlocked {
@@ -119,7 +117,6 @@ struct MainTabView: View {
     let backupService: BackupService
     let nightlyBackupService: NightlyBackupService
     let notificationService: NotificationService
-    let storeService: StoreKitService
 
     // ViewModels persisted via @State — never recreated on body re-evaluation
     @State private var recordViewModel: RecordViewModel
@@ -136,8 +133,7 @@ struct MainTabView: View {
         searchService: SearchService,
         backupService: BackupService,
         nightlyBackupService: NightlyBackupService,
-        notificationService: NotificationService,
-        storeService: StoreKitService
+        notificationService: NotificationService
     ) {
         self.secureFileStore = secureFileStore
         self.entryRepository = entryRepository
@@ -146,7 +142,6 @@ struct MainTabView: View {
         self.backupService = backupService
         self.nightlyBackupService = nightlyBackupService
         self.notificationService = notificationService
-        self.storeService = storeService
 
         self._recordViewModel = State(initialValue: RecordViewModel(
             recordingService: recordingService,
@@ -155,8 +150,7 @@ struct MainTabView: View {
             secureFileStore: secureFileStore,
             entryRepository: entryRepository,
             projectRepository: projectRepository,
-            notificationService: notificationService,
-            storeService: storeService
+            notificationService: notificationService
         ))
         self._entryListViewModel = State(initialValue: EntryListViewModel(
             entryRepository: entryRepository
@@ -173,8 +167,7 @@ struct MainTabView: View {
                 entryRepository: entryRepository,
                 projectRepository: projectRepository,
                 secureFileStore: secureFileStore,
-                recordViewModel: recordViewModel,
-                storeService: storeService
+                recordViewModel: recordViewModel
             )
             .tabItem {
                 Label("Home", systemImage: "house")
@@ -183,7 +176,6 @@ struct MainTabView: View {
             EntryListView(
                 viewModel: entryListViewModel,
                 projectViewModel: projectListViewModel,
-                storeService: storeService,
                 secureFileStore: secureFileStore,
                 entryRepository: entryRepository,
                 projectRepository: projectRepository
@@ -197,8 +189,7 @@ struct MainTabView: View {
                 projectRepository: projectRepository,
                 backupService: backupService,
                 nightlyBackupService: nightlyBackupService,
-                notificationService: notificationService,
-                storeService: storeService
+                notificationService: notificationService
             )
             .tabItem {
                 Label("Settings", systemImage: "gearshape")

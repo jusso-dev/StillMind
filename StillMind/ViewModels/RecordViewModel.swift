@@ -46,7 +46,6 @@ final class RecordViewModel {
     private let entryRepository: EntryRepository
     private let projectRepository: ProjectRepository
     private let notificationService: NotificationService?
-    let storeService: StoreKitService
 
     @ObservationIgnored private var meteringTimer: Timer?
     @ObservationIgnored private let taggingService = TaggingService()
@@ -56,7 +55,7 @@ final class RecordViewModel {
     /// present a supportive alert with Lifeline Australia details.
     var showingSafetyAlert = false
 
-    /// Current total entry count, used to enforce free-tier limits.
+    /// Current total entry count.
     var entryCount: Int = 0
 
     /// Remaining seconds before the recording auto-stops.
@@ -71,8 +70,7 @@ final class RecordViewModel {
         secureFileStore: SecureFileStore,
         entryRepository: EntryRepository,
         projectRepository: ProjectRepository,
-        notificationService: NotificationService? = nil,
-        storeService: StoreKitService
+        notificationService: NotificationService? = nil
     ) {
         self.recordingService = recordingService
         self.transcriptionService = transcriptionService
@@ -81,12 +79,6 @@ final class RecordViewModel {
         self.entryRepository = entryRepository
         self.projectRepository = projectRepository
         self.notificationService = notificationService
-        self.storeService = storeService
-    }
-
-    /// Whether the user can create a new entry based on their plan.
-    var canCreateEntry: Bool {
-        storeService.canCreateEntry(currentCount: entryCount)
     }
 
     /// Refreshes the current entry count from the repository.

@@ -6,7 +6,6 @@ struct RecordView: View {
     @Binding var isPresented: Bool
 
     @State private var availableProjects: [Project] = []
-    @State private var showingUpgrade = false
     @State private var breatheAnimation = false
     @FocusState private var isTextEditorFocused: Bool
 
@@ -52,9 +51,6 @@ struct RecordView: View {
             .task {
                 availableProjects = await viewModel.availableProjects()
                 await viewModel.refreshEntryCount()
-            }
-            .sheet(isPresented: $showingUpgrade) {
-                ProUpgradeView(storeService: viewModel.storeService, feature: .entries)
             }
             .alert("We're here for you", isPresented: $viewModel.showingSafetyAlert) {
                 Link("Call Lifeline (\(SafetyService.lifelineNumber))",
@@ -323,13 +319,9 @@ struct RecordView: View {
                     recordButton(isRecording: false)
                 } else {
                     Button {
-                        if !viewModel.canCreateEntry {
-                            showingUpgrade = true
-                        } else {
-                            isTextEditorFocused = false
-                            Haptics.medium()
-                            viewModel.submitText()
-                        }
+                        isTextEditorFocused = false
+                        Haptics.medium()
+                        viewModel.submitText()
                     } label: {
                         Label("Save Entry", systemImage: "arrow.up.circle.fill")
                             .frame(maxWidth: 200)
@@ -394,8 +386,6 @@ struct RecordView: View {
             if isRecording {
                 Haptics.medium()
                 viewModel.stopRecording()
-            } else if !viewModel.canCreateEntry {
-                showingUpgrade = true
             } else {
                 Haptics.medium()
                 let projectId = viewModel.selectedProjectId

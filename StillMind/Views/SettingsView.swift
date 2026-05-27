@@ -8,7 +8,6 @@ struct SettingsView: View {
     let backupService: BackupService
     let nightlyBackupService: NightlyBackupService
     let notificationService: NotificationService
-    let storeService: StoreKitService
     @AppStorage("requireBiometrics") private var requireBiometrics = true
     @State private var showingPanicLockConfirmation = false
     @State private var showingPDFExport = false
@@ -31,10 +30,6 @@ struct SettingsView: View {
     @State private var dailyReminderEnabled = false
     @State private var reminderTime = Date()
     @State private var notificationPermissionDenied = false
-
-    // Upgrade
-    @State private var showingUpgrade = false
-    @State private var upgradeFeature: ProUpgradeView.Feature = .backup
 
     // Nightly backup
     @State private var nightlyBackupEnabled = false
@@ -91,70 +86,42 @@ struct SettingsView: View {
                 }
 
                 Section {
-                    if storeService.canBackup {
-                        Button {
-                            backupPassword = ""
-                            backupPasswordConfirm = ""
-                            showingBackupPassword = true
-                        } label: {
-                            HStack {
-                                Label("Create Encrypted Backup", systemImage: "arrow.up.doc.fill")
-                                Spacer()
-                                if isCreatingBackup {
-                                    ProgressView()
-                                }
+                    Button {
+                        backupPassword = ""
+                        backupPasswordConfirm = ""
+                        showingBackupPassword = true
+                    } label: {
+                        HStack {
+                            Label("Create Encrypted Backup", systemImage: "arrow.up.doc.fill")
+                            Spacer()
+                            if isCreatingBackup {
+                                ProgressView()
                             }
                         }
-                        .disabled(isCreatingBackup)
-                        .sheet(isPresented: $showingBackupShare) {
-                            if let url = backupShareURL {
-                                ShareSheet(items: [url])
-                            }
+                    }
+                    .disabled(isCreatingBackup)
+                    .sheet(isPresented: $showingBackupShare) {
+                        if let url = backupShareURL {
+                            ShareSheet(items: [url])
                         }
+                    }
 
-                        Button {
-                            showingRestorePicker = true
-                        } label: {
-                            Label("Restore from Backup", systemImage: "arrow.down.doc.fill")
-                        }
-                        .fileImporter(
-                            isPresented: $showingRestorePicker,
-                            allowedContentTypes: [.data],
-                            allowsMultipleSelection: false
-                        ) { result in
-                            handleRestoreFileSelected(result: result)
-                        }
-                    } else {
-                        Button {
-                            upgradeFeature = .backup
-                            showingUpgrade = true
-                        } label: {
-                            HStack {
-                                Label("Create Encrypted Backup", systemImage: "arrow.up.doc.fill")
-                                Spacer()
-                                Image(systemName: "lock.fill")
-                                    .foregroundStyle(.secondary)
-                            }
-                        }
-
-                        Button {
-                            upgradeFeature = .backup
-                            showingUpgrade = true
-                        } label: {
-                            HStack {
-                                Label("Restore from Backup", systemImage: "arrow.down.doc.fill")
-                                Spacer()
-                                Image(systemName: "lock.fill")
-                                    .foregroundStyle(.secondary)
-                            }
-                        }
+                    Button {
+                        showingRestorePicker = true
+                    } label: {
+                        Label("Restore from Backup", systemImage: "arrow.down.doc.fill")
+                    }
+                    .fileImporter(
+                        isPresented: $showingRestorePicker,
+                        allowedContentTypes: [.data],
+                        allowsMultipleSelection: false
+                    ) { result in
+                        handleRestoreFileSelected(result: result)
                     }
                 } header: {
                     Text("Backup & Restore")
                 } footer: {
-                    Text(storeService.canBackup
-                        ? "Backups are encrypted with a password you choose. Save to Files for local storage or iCloud Drive for cloud backup."
-                        : "Upgrade to Pro to enable encrypted backup and restore.")
+                    Text("Backups are encrypted with a password you choose. Save to Files for local storage or iCloud Drive for cloud backup.")
                 }
 
                 if let status = backupStatus {
@@ -164,7 +131,7 @@ struct SettingsView: View {
                     }
                 }
 
-                if storeService.canBackup { Section {
+                Section {
                     Toggle("Enable Nightly Backup", isOn: $nightlyBackupEnabled)
                         .onChange(of: nightlyBackupEnabled) { _, enabled in
                             if enabled && nightlyHasFolder && nightlyHasPassword {
@@ -265,25 +232,11 @@ struct SettingsView: View {
                     Text("Automatic Nightly Backup")
                 } footer: {
                     Text("Automatically creates an encrypted backup every night and saves it to your chosen folder. Old backups are pruned automatically.")
-                } }
+                }
 
                 Section("Data") {
-                    if storeService.canExportPDF {
-                        Button("Export Journal as PDF") {
-                            showingPDFExport = true
-                        }
-                    } else {
-                        Button {
-                            upgradeFeature = .pdfExport
-                            showingUpgrade = true
-                        } label: {
-                            HStack {
-                                Label("Export Journal as PDF", systemImage: "doc.richtext.fill")
-                                Spacer()
-                                Image(systemName: "lock.fill")
-                                    .foregroundStyle(.secondary)
-                            }
-                        }
+                    Button("Export Journal as PDF") {
+                        showingPDFExport = true
                     }
 
                     Button("Delete All Data", role: .destructive) {
@@ -296,33 +249,6 @@ struct SettingsView: View {
                         Label("All data has been deleted.", systemImage: "checkmark.circle.fill")
                             .foregroundStyle(.green)
                     }
-                }
-
-                Section {
-                    if storeService.isPro {
-                        Label("StillMind Pro", systemImage: "checkmark.seal.fill")
-                            .foregroundStyle(Color.smAccent)
-                    } else {
-                        Button {
-                            upgradeFeature = .entries
-                            showingUpgrade = true
-                        } label: {
-                            HStack {
-                                Label("Upgrade to Pro", systemImage: "star.fill")
-                                Spacer()
-                                if let product = storeService.proProduct {
-                                    Text(product.displayPrice)
-                                        .foregroundStyle(.secondary)
-                                }
-                            }
-                        }
-
-                        Button("Restore Purchase") {
-                            Task { await storeService.restorePurchases() }
-                        }
-                    }
-                } header: {
-                    Text("Subscription")
                 }
 
                 Section("About") {
@@ -429,9 +355,6 @@ struct SettingsView: View {
                 Button("OK", role: .cancel) {}
             } message: {
                 Text("Please enable notifications for StillMind in Settings → Notifications to receive daily journal reminders.")
-            }
-            .sheet(isPresented: $showingUpgrade) {
-                ProUpgradeView(storeService: storeService, feature: upgradeFeature)
             }
             .onAppear {
                 dailyReminderEnabled = notificationService.isEnabled

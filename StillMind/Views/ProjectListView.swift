@@ -3,13 +3,11 @@ import SwiftUI
 /// Displays all projects as folders for grouping journal entries.
 struct ProjectListView: View {
     let viewModel: ProjectListViewModel
-    let storeService: StoreKitService
     let secureFileStore: SecureFileStore
     let entryRepository: EntryRepository
     let projectRepository: ProjectRepository
 
     @State private var showingNewProject = false
-    @State private var showingUpgrade = false
     @State private var newProjectName = ""
     @State private var newProjectDescription = ""
     @State private var searchText = ""
@@ -29,19 +27,11 @@ struct ProjectListView: View {
                 if viewModel.isLoading {
                     ProgressView("Loading projects...")
                 } else if viewModel.projects.isEmpty {
-                    if storeService.canCreateProjects {
-                        ContentUnavailableView(
-                            "No Projects",
-                            systemImage: "folder.badge.plus",
-                            description: Text("Create a project to organize your journal entries.")
-                        )
-                    } else {
-                        ContentUnavailableView(
-                            "Pro Feature",
-                            systemImage: "lock.fill",
-                            description: Text("Upgrade to Pro to create projects and organize your journal entries.")
-                        )
-                    }
+                    ContentUnavailableView(
+                        "No Projects",
+                        systemImage: "folder.badge.plus",
+                        description: Text("Create a project to organize your journal entries.")
+                    )
                 } else {
                     List {
                         ForEach(filteredProjects) { project in
@@ -73,18 +63,11 @@ struct ProjectListView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        if storeService.canCreateProjects {
-                            showingNewProject = true
-                        } else {
-                            showingUpgrade = true
-                        }
+                        showingNewProject = true
                     } label: {
                         Image(systemName: "folder.badge.plus")
                     }
                 }
-            }
-            .sheet(isPresented: $showingUpgrade) {
-                ProUpgradeView(storeService: storeService, feature: .projects)
             }
             .alert("New Project", isPresented: $showingNewProject) {
                 TextField("Project name", text: $newProjectName)

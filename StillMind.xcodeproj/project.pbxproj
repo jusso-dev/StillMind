@@ -40,8 +40,6 @@
 		A10000032 /* BackupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000032 /* BackupService.swift */; };
 		A10000033 /* NightlyBackupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000033 /* NightlyBackupService.swift */; };
 		A10000034 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000034 /* NotificationService.swift */; };
-		A10000035 /* StoreKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000035 /* StoreKitService.swift */; };
-		A10000036 /* ProUpgradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000036 /* ProUpgradeView.swift */; };
 		A10000038 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000038 /* LaunchView.swift */; };
 		A10000039 /* ExtractiveSummarizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000039 /* ExtractiveSummarizer.swift */; };
 		A10000040 /* StillMindInference.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000040 /* StillMindInference.swift */; };
@@ -107,8 +105,6 @@
 		A20000032 /* BackupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupService.swift; sourceTree = "<group>"; };
 		A20000033 /* NightlyBackupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightlyBackupService.swift; sourceTree = "<group>"; };
 		A20000034 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
-		A20000035 /* StoreKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitService.swift; sourceTree = "<group>"; };
-		A20000036 /* ProUpgradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProUpgradeView.swift; sourceTree = "<group>"; };
 		A20000038 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		A20000039 /* ExtractiveSummarizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtractiveSummarizer.swift; sourceTree = "<group>"; };
 		A20000040 /* StillMindInference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillMindInference.swift; sourceTree = "<group>"; };
@@ -196,7 +192,6 @@
 				A20000032 /* BackupService.swift */,
 				A20000033 /* NightlyBackupService.swift */,
 				A20000034 /* NotificationService.swift */,
-				A20000035 /* StoreKitService.swift */,
 				A20000039 /* ExtractiveSummarizer.swift */,
 				A20000040 /* StillMindInference.swift */,
 				A20000043 /* TaggingService.swift */,
@@ -237,7 +232,6 @@
 				A20000029 /* ProjectDetailView.swift */,
 				A20000030 /* PDFExportView.swift */,
 				A20000031 /* InsightsView.swift */,
-				A20000036 /* ProUpgradeView.swift */,
 				D2506BA1532CDF63CB85FE47 /* Theme.swift */,
 				492A03B47F82F5C2547F11A4 /* HomeView.swift */,
 				A20000038 /* LaunchView.swift */,
@@ -359,8 +353,6 @@
 				A10000032 /* BackupService.swift in Sources */,
 				A10000033 /* NightlyBackupService.swift in Sources */,
 				A10000034 /* NotificationService.swift in Sources */,
-				A10000035 /* StoreKitService.swift in Sources */,
-				A10000036 /* ProUpgradeView.swift in Sources */,
 				A161A1993548344EA78F2DA5 /* Theme.swift in Sources */,
 				A6C31D6197C657F50EEC6BD4 /* HomeView.swift in Sources */,
 				A10000038 /* LaunchView.swift in Sources */,

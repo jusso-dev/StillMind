@@ -1,5 +1,7 @@
 # StillMind
 
+<img src="StillMind/Assets.xcassets/AppIcon.appiconset/AppIcon.png" alt="StillMind app icon" width="112" height="112">
+
 StillMind is a privacy-first voice journaling app for iOS. It records short
 voice entries, transcribes them on device, summarizes them locally, organizes
 them into projects, and stores sensitive data encrypted on the device.
