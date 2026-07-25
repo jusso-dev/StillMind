@@ -41,17 +41,19 @@ struct StillMindApp: App {
         )
         self.backupService = backup
         let nightlyBackup = NightlyBackupService(backupService: backup)
-        nightlyBackup.registerBackgroundTask()
+        if !SnapshotMode.isActive {
+            nightlyBackup.registerBackgroundTask()
+        }
         self.nightlyBackupService = nightlyBackup
         self.notificationService = NotificationService()
 
         // If nightly backup was previously enabled, re-schedule on launch
-        if nightlyBackup.isEnabled {
+        if !SnapshotMode.isActive && nightlyBackup.isEnabled {
             nightlyBackup.scheduleNextBackup()
         }
 
         // Re-schedule daily reminder if previously enabled
-        if notificationService.isEnabled {
+        if !SnapshotMode.isActive && notificationService.isEnabled {
             notificationService.scheduleDailyReminder()
         }
     }
@@ -71,24 +73,25 @@ struct StillMindApp: App {
                 notificationService: notificationService
             )
             .overlay {
-                if requireBiometrics && !isUnlocked {
+                if !SnapshotMode.isActive && requireBiometrics && !isUnlocked {
                     LockScreenView(isUnlocked: $isUnlocked)
                         .transition(.opacity)
                 }
             }
             .overlay {
-                if !launchFinished {
+                if !SnapshotMode.isActive && !launchFinished {
                     LaunchView(isFinished: $launchFinished)
                 }
             }
             .overlay {
-                if launchFinished && !hasCompletedOnboarding {
+                if !SnapshotMode.isActive && launchFinished && !hasCompletedOnboarding {
                     OnboardingView(isComplete: $hasCompletedOnboarding)
                         .transition(.opacity)
                 }
             }
         }
         .onChange(of: scenePhase) { _, newPhase in
+            guard !SnapshotMode.isActive else { return }
             switch newPhase {
             case .active:
                 // Catch-up: if the BGProcessingTask didn't fire overnight,

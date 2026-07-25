@@ -36,14 +36,13 @@ struct RecordView: View {
                     }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
+                    Button("Close", systemImage: "xmark.circle.fill") {
                         handleDismiss()
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.title3)
-                            .symbolRenderingMode(.hierarchical)
-                            .foregroundStyle(.secondary)
                     }
+                    .labelStyle(.iconOnly)
+                    .font(.title3)
+                    .symbolRenderingMode(.hierarchical)
+                    .foregroundStyle(.secondary)
                     .opacity(viewModel.state == .recording ? 0.3 : 1)
                     .disabled(viewModel.state == .recording)
                 }

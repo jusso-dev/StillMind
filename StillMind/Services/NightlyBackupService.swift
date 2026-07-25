@@ -10,10 +10,10 @@ import os
 /// - Checks for overdue backups every time the app becomes active
 /// - Attempts a backup when the app moves to background (using beginBackgroundTask)
 final class NightlyBackupService: @unchecked Sendable {
-    static let taskIdentifier = "com.stillmind.nightly-backup"
+    static let taskIdentifier = "com.au.yarndigi.StillMind.nightly-backup"
 
     private let backupService: BackupService
-    private let logger = Logger(subsystem: "com.stillmind", category: "NightlyBackup")
+    private let logger = Logger(subsystem: "com.au.yarndigi.StillMind", category: "NightlyBackup")
 
     // UserDefaults keys
     private static let enabledKey = "nightlyBackupEnabled"
@@ -214,7 +214,7 @@ final class NightlyBackupService: @unchecked Sendable {
         guard isBackupOverdue else { return }
         logger.info("Backup is overdue — running catch-up backup on foreground")
         Task {
-            await performNightlyBackup()
+            _ = await performNightlyBackup()
         }
     }
 
@@ -224,19 +224,22 @@ final class NightlyBackupService: @unchecked Sendable {
         guard isBackupOverdue else { return }
         logger.info("Backup is overdue — attempting backup during background transition")
         let app = UIApplication.shared
-        var backgroundTaskID: UIBackgroundTaskIdentifier = .invalid
-        backgroundTaskID = app.beginBackgroundTask(withName: "StillMindNightlyBackup") {
-            // Expiration handler — clean up
-            if backgroundTaskID != .invalid {
-                app.endBackgroundTask(backgroundTaskID)
-                backgroundTaskID = .invalid
+        let handle = BackgroundTaskHandle()
+        let identifier = app.beginBackgroundTask(withName: "StillMindNightlyBackup") {
+            let expiredIdentifier = handle.take()
+            guard expiredIdentifier != .invalid else { return }
+            Task { @MainActor in
+                UIApplication.shared.endBackgroundTask(expiredIdentifier)
             }
         }
-        guard backgroundTaskID != .invalid else { return }
+        handle.store(identifier)
+        guard identifier != .invalid else { return }
         Task {
-            await performNightlyBackup()
+            _ = await performNightlyBackup()
+            let completedIdentifier = handle.take()
+            guard completedIdentifier != .invalid else { return }
             await MainActor.run {
-                app.endBackgroundTask(backgroundTaskID)
+                UIApplication.shared.endBackgroundTask(completedIdentifier)
             }
         }
     }
@@ -261,19 +264,20 @@ final class NightlyBackupService: @unchecked Sendable {
     /// Perform the backup. Returns true on success. Thread-safe — concurrent calls are no-ops.
     func performNightlyBackup() async -> Bool {
         // Prevent concurrent runs from multiple triggers
-        backupLock.lock()
-        if isBackupRunning {
-            backupLock.unlock()
+        let claimedRun = backupLock.withLock {
+            guard !isBackupRunning else { return false }
+            isBackupRunning = true
+            return true
+        }
+        guard claimedRun else {
             logger.info("Backup already in progress, skipping")
             return false
         }
-        isBackupRunning = true
-        backupLock.unlock()
 
         defer {
-            backupLock.lock()
-            isBackupRunning = false
-            backupLock.unlock()
+            backupLock.withLock {
+                isBackupRunning = false
+            }
         }
 
         logger.info("Starting nightly backup")
@@ -347,6 +351,24 @@ final class NightlyBackupService: @unchecked Sendable {
     }
 }
 
+private final class BackgroundTaskHandle: @unchecked Sendable {
+    private let lock = NSLock()
+    private var identifier: UIBackgroundTaskIdentifier = .invalid
+
+    func store(_ identifier: UIBackgroundTaskIdentifier) {
+        lock.withLock {
+            self.identifier = identifier
+        }
+    }
+
+    func take() -> UIBackgroundTaskIdentifier {
+        lock.withLock {
+            defer { identifier = .invalid }
+            return identifier
+        }
+    }
+}
+
 // MARK: - Errors
 
 enum NightlyBackupError: LocalizedError {
@@ -368,4 +390,3 @@ enum NightlyBackupError: LocalizedError {
         }
     }
 }
-

@@ -9,6 +9,10 @@ actor ProjectRepository {
     init() {
         let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         self.storageURL = docs.appendingPathComponent("projects.json")
+        if SnapshotMode.isActive {
+            self.projects = SnapshotSampleData.projects
+            self.loaded = true
+        }
     }
 
     // MARK: - CRUD

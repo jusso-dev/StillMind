@@ -1,0 +1,32 @@
+StillMind is a private voice journal designed to help you slow down, capture what is on your mind, and notice the patterns that matter.
+
+Record a short reflection or write one instead. StillMind transcribes your voice, creates a concise summary, and organises useful details such as themes, moods, and action items—all on your device.
+
+CAPTURE THOUGHTS NATURALLY
+- Record a voice reflection or write a text entry
+- Review and edit transcripts before saving
+- Turn longer thoughts into clear, useful summaries
+
+REFLECT WITHOUT JUDGMENT
+- Notice gentle mood patterns over time
+- See your journaling rhythm at a glance
+- Revisit themes, people, and next steps
+
+STAY ORGANISED
+- Group related entries into projects
+- Search transcripts, summaries, and tags
+- Export entries as clean PDFs
+
+PRIVATE BY DESIGN
+- Journal content stays on your device
+- Audio and entry data are encrypted at rest
+- Encryption keys are protected in the Keychain
+- Face ID can keep your journal locked
+- There are no accounts, ads, analytics, subscriptions, or in-app purchases
+
+BACK UP ON YOUR TERMS
+- Create password-protected encrypted backups
+- Restore your journal on another device
+- Configure automatic local backups
+
+StillMind is free to use. Your thoughts are yours.

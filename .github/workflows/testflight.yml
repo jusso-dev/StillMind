@@ -1,0 +1,83 @@
+name: iOS TestFlight
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: ios-testflight
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  build-test-upload:
+    name: Build and upload
+    runs-on: macos-26
+    timeout-minutes: 75
+    environment: testflight
+    env:
+      ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+      ASC_KEY_BASE64: ${{ secrets.ASC_KEY_BASE64 }}
+      MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
+      MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+      MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+      FASTLANE_SKIP_UPDATE_CHECK: "1"
+      FASTLANE_HIDE_TIMESTAMP: "1"
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Verify Xcode 26
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcodebuild -version
+          xcodebuild -version | head -n 1 | grep -Eq '^Xcode 26([.]|$)'
+
+      - name: Set up Ruby and Fastlane
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.4"
+          bundler-cache: true
+
+      - name: Validate release secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          for secret_name in \
+            ASC_KEY_ID \
+            ASC_ISSUER_ID \
+            ASC_KEY_BASE64 \
+            MATCH_GIT_URL \
+            MATCH_PASSWORD \
+            MATCH_GIT_BASIC_AUTHORIZATION; do
+            if [[ -z "${!secret_name:-}" ]]; then
+              echo "Missing required GitHub secret: ${secret_name}" >&2
+              exit 1
+            fi
+          done
+
+      - name: Compile app
+        run: bundle exec fastlane ios tests
+
+      - name: Upload to TestFlight
+        run: bundle exec fastlane ios beta
+
+      - name: Preserve IPA and symbols
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: StillMind-iOS-${{ github.run_number }}-${{ github.run_attempt }}
+          path: |
+            build/StillMind.ipa
+            build/*.dSYM.zip
+          if-no-files-found: warn
+          retention-days: 14

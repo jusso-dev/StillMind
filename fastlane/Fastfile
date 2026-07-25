@@ -1,0 +1,154 @@
+default_platform(:ios)
+
+APP_IDENTIFIER = "com.au.yarndigi.StillMind"
+SCHEME = "StillMind"
+XCODEPROJ = "StillMind.xcodeproj"
+BUILD_OUTPUT_DIRECTORY = "build"
+
+platform :ios do
+  before_all do
+    setup_ci if is_ci
+  end
+
+  desc "Authenticate to App Store Connect with an API key"
+  private_lane :asc_key do
+    key_id = ENV.fetch("ASC_KEY_ID")
+    if ENV["ASC_KEY_BASE64"]
+      app_store_connect_api_key(
+        key_id: key_id,
+        issuer_id: ENV.fetch("ASC_ISSUER_ID"),
+        key_content: ENV.fetch("ASC_KEY_BASE64"),
+        is_key_content_base64: true,
+        in_house: false
+      )
+    else
+      app_store_connect_api_key(
+        key_id: key_id,
+        issuer_id: ENV.fetch("ASC_ISSUER_ID"),
+        key_filepath: ENV["ASC_KEY_PATH"] || File.expand_path("~/.keys/AuthKey_#{key_id}.p8"),
+        in_house: false
+      )
+    end
+  end
+
+  desc "Return the next build number in the current TestFlight version train"
+  private_lane :next_build_number do |options|
+    version = get_version_number(xcodeproj: XCODEPROJ, target: SCHEME)
+    latest_testflight_build_number(
+      api_key: options[:api_key],
+      app_identifier: APP_IDENTIFIER,
+      version: version,
+      platform: "ios",
+      initial_build_number: 0
+    ) + 1
+  end
+
+  desc "Fetch App Store signing assets through match"
+  private_lane :prepare_signing do
+    match(type: "appstore", readonly: true, app_identifier: APP_IDENTIFIER)
+  end
+
+  desc "Build a signed App Store archive"
+  private_lane :build_release do
+    prepare_signing
+    build_app(
+      project: XCODEPROJ,
+      scheme: SCHEME,
+      clean: true,
+      include_bitcode: false,
+      export_method: "app-store",
+      output_directory: BUILD_OUTPUT_DIRECTORY,
+      output_name: "StillMind.ipa",
+      export_options: {
+        signingStyle: "manual",
+        provisioningProfiles: {
+          APP_IDENTIFIER => "match AppStore #{APP_IDENTIFIER}"
+        }
+      }
+    )
+  end
+
+  desc "Generate or sync the App Store certificate and provisioning profile"
+  lane :certs do
+    asc_key
+    match(type: "appstore", readonly: false, app_identifier: APP_IDENTIFIER)
+  end
+
+  desc "Compile the app for an iOS Simulator without signing"
+  lane :tests do
+    project_path = File.expand_path("../#{XCODEPROJ}", __dir__)
+    derived_data_path = File.expand_path("../#{BUILD_OUTPUT_DIRECTORY}/DerivedData", __dir__)
+    sh(
+      "xcodebuild",
+      "-project", project_path,
+      "-scheme", SCHEME,
+      "-sdk", "iphonesimulator",
+      "-destination", "generic/platform=iOS Simulator",
+      "-derivedDataPath", derived_data_path,
+      "CODE_SIGNING_ALLOWED=NO",
+      "build"
+    )
+  end
+
+  desc "Capture and frame the required iPhone and iPad App Store screenshots"
+  lane :screenshots do
+    capture_screenshots(
+      project: XCODEPROJ,
+      clear_previous_screenshots: true
+    )
+    sh("bash", File.expand_path("framing/frame_ios.sh", __dir__))
+  end
+
+  desc "Build and upload a new TestFlight build without submitting it"
+  lane :beta do
+    api_key = asc_key
+    increment_build_number(
+      xcodeproj: XCODEPROJ,
+      build_number: next_build_number(api_key: api_key)
+    )
+    build_release
+    upload_to_testflight(
+      api_key: api_key,
+      ipa: File.join(BUILD_OUTPUT_DIRECTORY, "StillMind.ipa"),
+      skip_submission: true,
+      skip_waiting_for_build_processing: true
+    )
+  end
+
+  desc "Upload metadata and fresh screenshots, and keep the app free"
+  lane :metadata do
+    api_key = asc_key
+    screenshots
+    deliver(
+      api_key: api_key,
+      price_tier: 0,
+      submit_for_review: false,
+      automatic_release: false,
+      force: true,
+      skip_binary_upload: true,
+      overwrite_screenshots: true,
+      precheck_include_in_app_purchases: false
+    )
+  end
+
+  desc "Build and upload the complete free App Store release without auto-submission"
+  lane :release do
+    api_key = asc_key
+    increment_build_number(
+      xcodeproj: XCODEPROJ,
+      build_number: next_build_number(api_key: api_key)
+    )
+    screenshots
+    build_release
+    deliver(
+      api_key: api_key,
+      ipa: File.join(BUILD_OUTPUT_DIRECTORY, "StillMind.ipa"),
+      price_tier: 0,
+      submit_for_review: false,
+      automatic_release: false,
+      force: true,
+      overwrite_screenshots: true,
+      precheck_include_in_app_purchases: false
+    )
+  end
+end

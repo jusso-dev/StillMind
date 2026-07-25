@@ -10,7 +10,7 @@ import os
 final class NotificationService: @unchecked Sendable {
     static let dailyReminderIdentifier = "com.stillmind.daily-reminder"
 
-    private let logger = Logger(subsystem: "com.stillmind", category: "Notifications")
+    private let logger = Logger(subsystem: "com.au.yarndigi.StillMind", category: "Notifications")
     private let center = UNUserNotificationCenter.current()
 
     // UserDefaults keys

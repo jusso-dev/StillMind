@@ -1,0 +1,22 @@
+devices([
+  "iPhone 17 Pro Max",
+  "iPad Pro 13-inch (M5)"
+])
+
+languages([
+  "en-AU"
+])
+
+scheme("SnapshotTest")
+output_directory("./fastlane/screenshots")
+clear_previous_screenshots(true)
+
+override_status_bar(true)
+override_status_bar_arguments(
+  "--time 9:41 --dataNetwork 5g --cellularBars 4 --batteryState charged --batteryLevel 100"
+)
+
+launch_arguments(["-StillMindSnapshotMode YES"])
+reinstall_app(true)
+app_identifier("com.au.yarndigi.StillMind")
+concurrent_simulators(true)

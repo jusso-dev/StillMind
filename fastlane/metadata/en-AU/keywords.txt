@@ -1,0 +1,1 @@
+journal,voice diary,private notes,mood tracker,reflection,mindfulness,offline,encrypted

@@ -50,7 +50,21 @@
 		A10000050 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000050 /* OnboardingView.swift */; };
 		A161A1993548344EA78F2DA5 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2506BA1532CDF63CB85FE47 /* Theme.swift */; };
 		A6C31D6197C657F50EEC6BD4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492A03B47F82F5C2547F11A4 /* HomeView.swift */; };
+		C10000001 /* SnapshotSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000001 /* SnapshotSupport.swift */; };
+		C10000002 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = C20000002 /* PrivacyInfo.xcprivacy */; };
+		C10000003 /* SnapshotTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000003 /* SnapshotTest.swift */; };
+		C10000004 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000004 /* SnapshotHelper.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C90000001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A90000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A60000001;
+			remoteInfo = StillMind;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		492A03B47F82F5C2547F11A4 /* HomeView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -97,11 +111,23 @@
 		A20000044 /* SafetyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyService.swift; sourceTree = "<group>"; };
 		A20000050 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		A30000001 /* StillMind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StillMind.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C20000001 /* SnapshotSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotSupport.swift; sourceTree = "<group>"; };
+		C20000002 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		C20000003 /* SnapshotTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTest.swift; sourceTree = "<group>"; };
+		C20000004 /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		C30000001 /* SnapshotTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnapshotTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2506BA1532CDF63CB85FE47 /* Theme.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A40000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C40000001 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -115,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				A50000002 /* StillMind */,
+				C50000002 /* SnapshotTest */,
 				A50000007 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -127,8 +154,10 @@
 				A50000005 /* Services */,
 				A50000006 /* ViewModels */,
 				A50000008 /* Views */,
+				C50000001 /* Support */,
 				A20000022 /* Assets.xcassets */,
 				A20000023 /* Info.plist */,
+				C20000002 /* PrivacyInfo.xcprivacy */,
 				A20000041 /* StillMindTagger.mlpackage */,
 				A20000042 /* vocab.txt */,
 			);
@@ -193,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				A30000001 /* StillMind.app */,
+				C30000001 /* SnapshotTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -218,6 +248,23 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		C50000001 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				C20000001 /* SnapshotSupport.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		C50000002 /* SnapshotTest */ = {
+			isa = PBXGroup;
+			children = (
+				C20000003 /* SnapshotTest.swift */,
+				C20000004 /* SnapshotHelper.swift */,
+			);
+			path = SnapshotTest;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -238,6 +285,24 @@
 			productReference = A30000001 /* StillMind.app */;
 			productType = "com.apple.product-type.application";
 		};
+		C60000001 /* SnapshotTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C80000001 /* Build configuration list for PBXNativeTarget "SnapshotTest" */;
+			buildPhases = (
+				C70000001 /* Sources */,
+				C40000001 /* Frameworks */,
+				C70000002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C90000002 /* PBXTargetDependency */,
+			);
+			name = SnapshotTest;
+			productName = SnapshotTest;
+			productReference = C30000001 /* SnapshotTest.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -250,6 +315,10 @@
 				TargetAttributes = {
 					A60000001 = {
 						CreatedOnToolsVersion = 16.0;
+					};
+					C60000001 = {
+						CreatedOnToolsVersion = 26.0;
+						TestTargetID = A60000001;
 					};
 				};
 			};
@@ -267,6 +336,7 @@
 			projectRoot = "";
 			targets = (
 				A60000001 /* StillMind */,
+				C60000001 /* SnapshotTest */,
 			);
 		};
 /* End PBXProject section */
@@ -277,8 +347,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				A10000022 /* Assets.xcassets in Resources */,
+				C10000002 /* PrivacyInfo.xcprivacy in Resources */,
 				A10000041 /* StillMindTagger.mlpackage in Resources */,
 				A10000042 /* vocab.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C70000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,10 +407,28 @@
 				A10000040 /* StillMindInference.swift in Sources */,
 				A10000043 /* TaggingService.swift in Sources */,
 				A10000044 /* SafetyService.swift in Sources */,
+				C10000001 /* SnapshotSupport.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C70000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C10000003 /* SnapshotTest.swift in Sources */,
+				C10000004 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C90000002 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A60000001 /* StillMind */;
+			targetProxy = C90000001 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		B10000001 /* Debug */ = {
@@ -446,6 +542,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 83ZX28V765;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = x86_64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StillMind/Info.plist;
@@ -464,7 +561,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.stillmind;
+				PRODUCT_BUNDLE_IDENTIFIER = com.au.yarndigi.StillMind;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -479,6 +576,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 83ZX28V765;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = x86_64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StillMind/Info.plist;
@@ -497,11 +595,47 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.stillmind;
+				PRODUCT_BUNDLE_IDENTIFIER = com.au.yarndigi.StillMind;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C11000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 83ZX28V765;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.au.yarndigi.StillMindSnapshotTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = StillMind;
+			};
+			name = Debug;
+		};
+		C11000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 83ZX28V765;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.au.yarndigi.StillMindSnapshotTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = StillMind;
 			};
 			name = Release;
 		};
@@ -522,6 +656,15 @@
 			buildConfigurations = (
 				B10000003 /* Debug */,
 				B10000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C80000001 /* Build configuration list for PBXNativeTarget "SnapshotTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C11000001 /* Debug */,
+				C11000002 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,0 +1,2 @@
+include_in_app_purchases(false)
+unreachable_urls(level: :warn)

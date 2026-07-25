@@ -146,8 +146,9 @@ git lfs install
 
 4. Build and run.
 
-For physical devices, set your own Apple development team in Xcode and replace
-the placeholder bundle identifier `com.example.stillmind` with one you control.
+The checked-in release configuration uses the Yarn Digi Apple development team
+and bundle identifier `com.au.yarndigi.StillMind`. Contributors outside that
+team should replace both values with ones they control.
 
 ## Model Assets
 
@@ -176,7 +177,23 @@ The app declares these user-facing permissions:
 | Face ID | Protect private journal content |
 
 The app also declares the background task identifier
-`com.stillmind.nightly-backup` for scheduled backup work.
+`com.au.yarndigi.StillMind.nightly-backup` for scheduled backup work.
+
+## App Store release
+
+Fastlane automates simulator compilation, App Store screenshots, TestFlight
+uploads, metadata, signing, and release builds:
+
+```sh
+bundle install
+bundle exec fastlane ios tests
+bundle exec fastlane ios screenshots
+bundle exec fastlane ios beta
+```
+
+See `fastlane/APP_STORE_CHECKLIST.md` for one-time Apple setup and the remaining
+manual App Store Connect details. StillMind is configured as a free app with no
+in-app purchases.
 
 ## Repository Hygiene
 

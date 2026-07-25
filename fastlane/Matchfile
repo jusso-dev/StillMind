@@ -1,0 +1,5 @@
+git_url(ENV["MATCH_GIT_URL"])
+storage_mode("git")
+type("appstore")
+app_identifier(["com.au.yarndigi.StillMind"])
+username(ENV["FASTLANE_APPLE_ID"]) if ENV["FASTLANE_APPLE_ID"]

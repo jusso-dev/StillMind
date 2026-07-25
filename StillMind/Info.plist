@@ -4,7 +4,11 @@
 <dict>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
-		<string>com.stillmind.nightly-backup</string>
+		<string>com.au.yarndigi.StillMind.nightly-backup</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>processing</string>
 	</array>
 	<key>UILaunchScreen</key>
 	<dict>

@@ -27,6 +27,7 @@ Package.resolved
 # Environment and secrets
 .env
 .env.*
+!.env.sample
 *.pem
 *.p8
 *.p12
@@ -36,3 +37,12 @@ Package.resolved
 
 # Logs
 *.log
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/screenshots/screenshots.html
+fastlane/test_output/
+vendor/bundle/
+.bundle/

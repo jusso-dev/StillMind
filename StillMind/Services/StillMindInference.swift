@@ -138,7 +138,7 @@ public final class DistilBertTokenizer {
 
         // Reserve 2 slots for [CLS] and [SEP]
         let truncated = Array(tokens.prefix(maxLength - 2))
-        var ids: [Int] = [clsID] + truncated.map { vocab[$0] ?? (vocab[Self.unkToken] ?? 100) } + [sepID]
+        let ids: [Int] = [clsID] + truncated.map { vocab[$0] ?? (vocab[Self.unkToken] ?? 100) } + [sepID]
 
         var inputIDs = ids.map { Int32($0) }
         var attentionMask = Array(repeating: Int32(1), count: inputIDs.count)

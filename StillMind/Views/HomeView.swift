@@ -253,9 +253,11 @@ struct HomeView: View {
     }
 
     private func deleteEntry(_ entry: VoiceEntry) {
-        try? entryRepository.delete(id: entry.id)
-        withAnimation {
-            recentEntries.removeAll { $0.id == entry.id }
+        Task {
+            try? await entryRepository.delete(id: entry.id)
+            withAnimation {
+                recentEntries.removeAll { $0.id == entry.id }
+            }
         }
     }
 }

@@ -12,6 +12,10 @@ actor EntryRepository {
         self.encryptionService = encryptionService
         let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         self.storageURL = docs.appendingPathComponent("entries.json")
+        if SnapshotMode.isActive {
+            self.entries = SnapshotSampleData.entries
+            self.loaded = true
+        }
     }
 
     // MARK: - CRUD Operations
