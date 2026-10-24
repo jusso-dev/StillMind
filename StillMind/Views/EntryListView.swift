@@ -66,10 +66,8 @@ struct EntryListView: View {
             .toolbar {
                 if selectedTab == .projects {
                     ToolbarItem(placement: .topBarTrailing) {
-                        Button {
+                        Button("New Project", systemImage: "folder.badge.plus") {
                             showingNewProject = true
-                        } label: {
-                            Image(systemName: "folder.badge.plus")
                         }
                     }
                 }
@@ -212,6 +210,7 @@ struct EntryListView: View {
 struct EntryRowView: View {
     let entry: VoiceEntry
     let viewModel: EntryListViewModel
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     var body: some View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
@@ -219,7 +218,7 @@ struct EntryRowView: View {
             HStack(alignment: .firstTextBaseline) {
                 Text(entry.summaryTitle.isEmpty ? "Untitled Entry" : entry.summaryTitle)
                     .font(.headline)
-                    .lineLimit(1)
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? 3 : 1)
                 Spacer()
                 Text(formatDuration(entry.durationSeconds))
                     .font(.caption)

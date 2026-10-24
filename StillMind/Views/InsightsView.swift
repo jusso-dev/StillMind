@@ -8,55 +8,55 @@ struct InsightsView: View {
 
     @State private var entries: [VoiceEntry] = []
     @State private var projects: [Project] = []
+    @ScaledMetric(relativeTo: .caption2) private var moodLabelSize: CGFloat = 9
 
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                if entries.isEmpty {
-                    emptyState
-                        .padding(.top, Spacing.xxl)
-                } else {
-                    VStack(spacing: Spacing.xl) {
-                        // Gentle insight text
-                        insightMessage
+        ScrollView {
+            if entries.isEmpty {
+                emptyState
+                    .padding(.top, Spacing.xxl)
+            } else {
+                VStack(spacing: Spacing.xl) {
+                    // Gentle insight text
+                    insightMessage
+                        .padding(.horizontal, Spacing.md)
+
+                    // Mood river
+                    if !moodDataPoints.isEmpty {
+                        MoodRiverChart(dataPoints: moodDataPoints)
                             .padding(.horizontal, Spacing.md)
-
-                        // Mood river
-                        if !moodDataPoints.isEmpty {
-                            MoodRiverChart(dataPoints: moodDataPoints)
-                                .padding(.horizontal, Spacing.md)
-                        }
-
-                        // Presence calendar
-                        PresenceCalendar(entries: entries)
-                            .padding(.horizontal, Spacing.md)
-
-                        // Recent moods as soft dots
-                        if !recentMoods.isEmpty {
-                            recentMoodFlow
-                                .padding(.horizontal, Spacing.md)
-                        }
-
-                        // Weekly cards
-                        if !weeklyGroups.isEmpty {
-                            weeksSection
-                        }
-
-                        Spacer(minLength: Spacing.xxl)
                     }
-                    .padding(.top, Spacing.md)
+
+                    // Presence calendar
+                    PresenceCalendar(entries: entries)
+                        .padding(.horizontal, Spacing.md)
+
+                    // Recent moods as soft dots
+                    if !recentMoods.isEmpty {
+                        recentMoodFlow
+                            .padding(.horizontal, Spacing.md)
+                    }
+
+                    // Weekly cards
+                    if !weeklyGroups.isEmpty {
+                        weeksSection
+                    }
+
+                    Spacer(minLength: Spacing.xxl)
                 }
+                .padding(.top, Spacing.md)
+                .readableWidth()
             }
-            .background(Color(.systemGroupedBackground))
-            .navigationTitle("Reflect")
-            .task {
-                entries = (try? await entryRepository.allEntries()) ?? []
-                projects = (try? await projectRepository.allProjects()) ?? []
-            }
-            .refreshable {
-                entries = (try? await entryRepository.allEntries()) ?? []
-                projects = (try? await projectRepository.allProjects()) ?? []
-            }
+        }
+        .background(Color(.systemGroupedBackground))
+        .navigationTitle("Reflect")
+        .task {
+            entries = (try? await entryRepository.allEntries()) ?? []
+            projects = (try? await projectRepository.allProjects()) ?? []
+        }
+        .refreshable {
+            entries = (try? await entryRepository.allEntries()) ?? []
+            projects = (try? await projectRepository.allProjects()) ?? []
         }
     }
 
@@ -109,7 +109,7 @@ struct InsightsView: View {
                                 .frame(width: 28, height: 28)
 
                             Text(item.mood)
-                                .font(.system(size: 9))
+                                .font(.system(size: moodLabelSize))
                                 .foregroundStyle(.tertiary)
                                 .lineLimit(1)
                         }
@@ -292,6 +292,7 @@ struct PresenceCalendar: View {
     let entries: [VoiceEntry]
 
     private let dayLabels = ["M", "T", "W", "T", "F", "S", "S"]
+    @ScaledMetric(relativeTo: .caption2) private var dayLabelSize: CGFloat = 9
 
     private var calendarDays: [CalendarDay] {
         let calendar = Calendar.current
@@ -324,7 +325,7 @@ struct PresenceCalendar: View {
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 6), count: 7), spacing: 6) {
                 ForEach(dayLabels.indices, id: \.self) { i in
                     Text(dayLabels[i])
-                        .font(.system(size: 9, weight: .medium))
+                        .font(.system(size: dayLabelSize, weight: .medium))
                         .foregroundStyle(.quaternary)
                         .frame(maxWidth: .infinity)
                 }
@@ -340,8 +341,18 @@ struct PresenceCalendar: View {
                     }
                 }
             }
+            // The dots only encode presence by color; give VoiceOver the summary.
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("Last 4 weeks")
+            .accessibilityValue(presenceSummary)
         }
         .cardStyle()
+    }
+
+    private var presenceSummary: String {
+        let pastDays = calendarDays.filter { !$0.isFuture }
+        let journaled = pastDays.filter { $0.entryCount > 0 }.count
+        return "Journaled on \(journaled) of \(pastDays.count) days"
     }
 
     private func calendarDot(for day: CalendarDay) -> some View {
@@ -398,6 +409,9 @@ struct WeekCard: View {
                             .frame(width: 12, height: 12)
                     }
                 }
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("Moods")
+                .accessibilityValue(group.entries.prefix(7).map { $0.mood ?? "Not set" }.joined(separator: ", "))
             }
 
             // Top tags

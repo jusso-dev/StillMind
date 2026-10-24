@@ -48,7 +48,10 @@ final class RecordViewModel {
     private let notificationService: NotificationService?
 
     @ObservationIgnored private var meteringTimer: Timer?
-    @ObservationIgnored private let taggingService = TaggingService()
+    // Lazy: loading the Core ML model is expensive, and SwiftUI may construct
+    // throwaway instances whenever MainTabView is re-initialised (e.g. on every
+    // scene phase change when an iPhone Duo moves between displays).
+    @ObservationIgnored private lazy var taggingService = TaggingService()
     @ObservationIgnored private let safetyService = SafetyService()
 
     /// Set to `true` when crisis language is detected so the view can
@@ -130,11 +133,9 @@ final class RecordViewModel {
     }
 
     func stopRecording() {
-        guard canStopRecording else {
-            state = .error("Recording must be at least \(Int(Self.minRecordingDuration)) seconds")
-            // Keep recording — don't stop
-            return
-        }
+        // Too short: keep recording. The view already shows how many seconds
+        // remain; switching to .error here left the mic running with no UI.
+        guard canStopRecording else { return }
 
         meteringTimer?.invalidate()
         meteringTimer = nil

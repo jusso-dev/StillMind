@@ -111,6 +111,7 @@ struct HomeView: View {
                     Spacer(minLength: Spacing.xxl)
                 }
                 .padding(.top, Spacing.sm)
+                .readableWidth()
             }
             .background(Color(.systemGroupedBackground))
             .navigationBarTitleDisplayMode(.inline)
@@ -292,6 +293,7 @@ private struct SwipeToDeleteCard<Content: View>: View {
 
             // Card content
             content
+                .accessibilityAction(named: "Delete", onDelete)
                 .offset(x: offset)
                 .gesture(
                     DragGesture(minimumDistance: 20)
@@ -324,13 +326,14 @@ private struct SwipeToDeleteCard<Content: View>: View {
 
 struct HomeEntryCard: View {
     let entry: VoiceEntry
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     var body: some View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
             // Title
             Text(entry.summaryTitle.isEmpty ? "Untitled Entry" : entry.summaryTitle)
                 .font(.headline)
-                .lineLimit(1)
+                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 3 : 1)
                 .foregroundStyle(.primary)
 
             // Transcript preview

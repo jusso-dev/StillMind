@@ -7,6 +7,7 @@ struct LockScreenView: View {
     @State private var authError: String?
     @State private var isAuthenticating = false
     @State private var breatheAnimation = false
+    @State private var promptOnActive = false
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
@@ -51,6 +52,7 @@ struct LockScreenView: View {
                     Label("Unlock", systemImage: "faceid")
                         .frame(maxWidth: .infinity)
                 }
+                .frame(maxWidth: 400)
                 .buttonStyle(.borderedProminent)
                 .tint(Color.smAccent)
                 .controlSize(.large)
@@ -69,13 +71,23 @@ struct LockScreenView: View {
             }
         }
         .onAppear { breatheAnimation = true }
+        // Auto-prompt only on launch or a real return from background. Plain
+        // inactive → active hops (the Face ID sheet itself, Control Center, an
+        // iPhone Duo moving between displays) must not re-prompt.
         .onChange(of: scenePhase) { _, newPhase in
-            if newPhase == .active && !isUnlocked && !isAuthenticating {
+            if newPhase == .background {
+                promptOnActive = true
+            } else if newPhase == .active && promptOnActive && !isUnlocked {
+                promptOnActive = false
                 Task { await authenticate() }
             }
         }
         .task {
-            await authenticate()
+            if scenePhase == .active {
+                await authenticate()
+            } else {
+                promptOnActive = true
+            }
         }
     }
 

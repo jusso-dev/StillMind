@@ -54,6 +54,7 @@
 		C10000002 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = C20000002 /* PrivacyInfo.xcprivacy */; };
 		C10000003 /* SnapshotTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000003 /* SnapshotTest.swift */; };
 		C10000004 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000004 /* SnapshotHelper.swift */; };
+		C10000005 /* DuoLayoutUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000005 /* DuoLayoutUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,7 @@
 		C20000002 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		C20000003 /* SnapshotTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTest.swift; sourceTree = "<group>"; };
 		C20000004 /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		C20000005 /* DuoLayoutUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuoLayoutUITests.swift; sourceTree = "<group>"; };
 		C30000001 /* SnapshotTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnapshotTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2506BA1532CDF63CB85FE47 /* Theme.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -261,6 +263,7 @@
 			children = (
 				C20000003 /* SnapshotTest.swift */,
 				C20000004 /* SnapshotHelper.swift */,
+				C20000005 /* DuoLayoutUITests.swift */,
 			);
 			path = SnapshotTest;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 			files = (
 				C10000003 /* SnapshotTest.swift in Sources */,
 				C10000004 /* SnapshotHelper.swift in Sources */,
+				C10000005 /* DuoLayoutUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -100,23 +100,11 @@ struct SettingsView: View {
                         }
                     }
                     .disabled(isCreatingBackup)
-                    .sheet(isPresented: $showingBackupShare) {
-                        if let url = backupShareURL {
-                            ShareSheet(items: [url])
-                        }
-                    }
 
                     Button {
                         showingRestorePicker = true
                     } label: {
                         Label("Restore from Backup", systemImage: "arrow.down.doc.fill")
-                    }
-                    .fileImporter(
-                        isPresented: $showingRestorePicker,
-                        allowedContentTypes: [.data],
-                        allowsMultipleSelection: false
-                    ) { result in
-                        handleRestoreFileSelected(result: result)
                     }
                 } header: {
                     Text("Backup & Restore")
@@ -321,6 +309,20 @@ struct SettingsView: View {
             }
             .sheet(isPresented: $showingPDFExport) {
                 PDFExportView(entryRepository: entryRepository, projectRepository: projectRepository)
+            }
+            // Attached to the List, not its rows: a lazily recycled row can drop the
+            // presentation when the list scrolls (short windows, e.g. folded landscape).
+            .sheet(isPresented: $showingBackupShare) {
+                if let url = backupShareURL {
+                    ShareSheet(items: [url])
+                }
+            }
+            .fileImporter(
+                isPresented: $showingRestorePicker,
+                allowedContentTypes: [.data],
+                allowsMultipleSelection: false
+            ) { result in
+                handleRestoreFileSelected(result: result)
             }
             .alert("Set Nightly Backup Password", isPresented: $showingNightlyPasswordPrompt) {
                 SecureField("Password", text: $nightlyPassword)

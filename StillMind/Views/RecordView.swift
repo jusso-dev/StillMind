@@ -8,6 +8,7 @@ struct RecordView: View {
     @State private var availableProjects: [Project] = []
     @State private var breatheAnimation = false
     @FocusState private var isTextEditorFocused: Bool
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
 
     var body: some View {
         NavigationStack {
@@ -15,18 +16,23 @@ struct RecordView: View {
                 Color(.systemBackground)
                     .ignoresSafeArea()
 
-                VStack(spacing: 0) {
-                    Spacer()
-
-                    // Center content — changes based on recording state
-                    centerContent
-                        .padding(.horizontal, Spacing.lg)
-
-                    Spacer()
-
-                    // Bottom action area
+                // Center content scrolls when the window is short (landscape,
+                // keyboard up, large text); actions stay pinned above it.
+                GeometryReader { proxy in
+                    ScrollView {
+                        centerContent
+                            .padding(.horizontal, Spacing.lg)
+                            .padding(.vertical, Spacing.md)
+                            .readableWidth(560)
+                            .frame(minHeight: proxy.size.height)
+                    }
+                    .scrollBounceBehavior(.basedOnSize)
+                    .scrollDismissesKeyboard(.interactively)
+                }
+                .safeAreaInset(edge: .bottom) {
                     bottomArea
-                        .padding(.bottom, Spacing.xxl)
+                        .padding(.top, Spacing.sm)
+                        .padding(.bottom, verticalSizeClass == .compact ? Spacing.md : Spacing.xxl)
                 }
             }
             .toolbar {
@@ -138,6 +144,7 @@ struct RecordView: View {
 
                 TextEditor(text: $viewModel.textInput)
                     .focused($isTextEditorFocused)
+                    .accessibilityLabel("Journal text")
                     .frame(minHeight: 120, maxHeight: 200)
                     .scrollContentBackground(.hidden)
                     .padding(Spacing.md)
@@ -151,6 +158,7 @@ struct RecordView: View {
                                 .padding(.top, 8)
                                 .padding(.leading, 4)
                                 .allowsHitTesting(false)
+                                .accessibilityHidden(true)
                         }
                     }
             }
@@ -240,6 +248,7 @@ struct RecordView: View {
                 .multilineTextAlignment(.center)
 
             TextEditor(text: $viewModel.transcript)
+                .accessibilityLabel("Transcript")
                 .frame(minHeight: 120, maxHeight: 200)
                 .scrollContentBackground(.hidden)
                 .padding(Spacing.md)

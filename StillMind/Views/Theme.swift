@@ -98,6 +98,13 @@ extension View {
             .background(.regularMaterial)
             .clipShape(.rect(cornerRadius: cornerRadius))
     }
+
+    /// Caps content at a comfortable reading width and centers it, so wide
+    /// windows (e.g. an unfolded iPhone Duo in landscape) don't stretch it edge to edge.
+    func readableWidth(_ maxWidth: CGFloat = 640) -> some View {
+        frame(maxWidth: maxWidth)
+            .frame(maxWidth: .infinity)
+    }
 }
 
 // MARK: - Date Formatting
