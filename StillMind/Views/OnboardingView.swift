@@ -6,6 +6,7 @@ struct OnboardingView: View {
 
     @State private var currentPage = 0
     @State private var appeared = false
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
 
     private let pages = OnboardingPage.all
     private let pageCount = OnboardingPage.all.count
@@ -73,9 +74,10 @@ struct OnboardingView: View {
                             .background(Color.smAccent)
                             .clipShape(.rect(cornerRadius: 16))
                     }
+                    .frame(maxWidth: 400)
                     .padding(.horizontal, Spacing.xl)
                 }
-                .padding(.bottom, Spacing.xxl)
+                .padding(.bottom, verticalSizeClass == .compact ? Spacing.md : Spacing.xxl)
             }
         }
         .opacity(appeared ? 1 : 0)
@@ -151,9 +153,25 @@ private struct OnboardingPageView: View {
     @State private var iconAnimating = false
 
     var body: some View {
-        VStack(spacing: Spacing.xl) {
-            Spacer()
+        // Scrolls and shrinks the artwork when the page is short (e.g. a
+        // folded iPhone Duo in landscape) so the copy is never clipped.
+        GeometryReader { proxy in
+            ScrollView {
+                pageContent(artSize: min(240, proxy.size.height * 0.45))
+                    .padding(.vertical, Spacing.md)
+                    .readableWidth()
+                    .frame(minHeight: proxy.size.height)
+            }
+            .scrollBounceBehavior(.basedOnSize)
+        }
+        .onAppear {
+            iconAnimating = true
+        }
+    }
 
+    private func pageContent(artSize: CGFloat) -> some View {
+        let scale = artSize / 240
+        return VStack(spacing: Spacing.xl) {
             // Animated icon with gradient circle background
             ZStack {
                 // Outer glow
@@ -162,11 +180,11 @@ private struct OnboardingPageView: View {
                         RadialGradient(
                             colors: [page.accentColor.opacity(0.15), .clear],
                             center: .center,
-                            startRadius: 40,
-                            endRadius: 120
+                            startRadius: 40 * scale,
+                            endRadius: 120 * scale
                         )
                     )
-                    .frame(width: 240, height: 240)
+                    .frame(width: artSize, height: artSize)
                     .scaleEffect(iconAnimating ? 1.05 : 0.95)
                     .animation(
                         .easeInOut(duration: 2.5).repeatForever(autoreverses: true),
@@ -182,11 +200,11 @@ private struct OnboardingPageView: View {
                             endPoint: .bottomTrailing
                         )
                     )
-                    .frame(width: 140, height: 140)
+                    .frame(width: 140 * scale, height: 140 * scale)
 
                 // Icon
                 Image(systemName: page.icon)
-                    .font(.system(size: 52, weight: .medium))
+                    .font(.system(size: 52 * scale, weight: .medium))
                     .foregroundStyle(
                         LinearGradient(
                             colors: page.iconColors,
@@ -218,12 +236,6 @@ private struct OnboardingPageView: View {
                     .opacity(isActive ? 1.0 : 0.0)
                     .animation(.spring(response: 0.5, dampingFraction: 0.8).delay(0.2), value: isActive)
             }
-
-            Spacer()
-            Spacer()
-        }
-        .onAppear {
-            iconAnimating = true
         }
     }
 }

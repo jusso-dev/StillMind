@@ -65,6 +65,7 @@ struct EntryDetailView: View {
                 }
             }
             .padding()
+            .readableWidth()
         }
         .navigationTitle(entry.summaryTitle.isEmpty ? "Entry" : entry.summaryTitle)
         .navigationBarTitleDisplayMode(.inline)
@@ -246,6 +247,7 @@ struct EntryDetailView: View {
 
             if isEditingTranscript {
                 TextEditor(text: $editedTranscript)
+                    .accessibilityLabel("Transcript")
                     .font(.body)
                     .frame(minHeight: 150)
                     .scrollContentBackground(.hidden)
@@ -378,10 +380,11 @@ struct FlowLayout: Layout {
 
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
         let result = arrange(proposal: proposal, subviews: subviews)
+        let itemProposal = ProposedViewSize(width: bounds.width, height: nil)
         for (index, position) in result.positions.enumerated() {
             subviews[index].place(
                 at: CGPoint(x: bounds.minX + position.x, y: bounds.minY + position.y),
-                proposal: .unspecified
+                proposal: itemProposal
             )
         }
     }
@@ -394,7 +397,9 @@ struct FlowLayout: Layout {
         var maxRowHeight: CGFloat = 0
 
         for subview in subviews {
-            let size = subview.sizeThatFits(.unspecified)
+            // Propose the row width so an item wider than the row (a long tag
+            // at a large text size) wraps instead of overflowing.
+            let size = subview.sizeThatFits(ProposedViewSize(width: maxWidth, height: nil))
             if x + size.width > maxWidth, x > 0 {
                 x = 0
                 y += maxRowHeight + spacing

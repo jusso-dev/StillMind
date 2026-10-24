@@ -42,12 +42,10 @@ struct ProjectDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button {
+                Button("Edit Project", systemImage: "pencil") {
                     editedName = project.name
                     editedDescription = project.description
                     isEditing = true
-                } label: {
-                    Image(systemName: "pencil")
                 }
             }
         }
@@ -75,12 +73,13 @@ struct ProjectDetailView: View {
 
 struct ProjectEntryRow: View {
     let entry: VoiceEntry
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(entry.summaryTitle.isEmpty ? "Untitled Entry" : entry.summaryTitle)
                 .font(.headline)
-                .lineLimit(1)
+                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 3 : 1)
 
             Text(entry.createdAt, style: .date)
                 .font(.caption)
